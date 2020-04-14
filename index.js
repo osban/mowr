@@ -8,7 +8,7 @@ module.exports = (url, opts = {}) => {
   
   let db
   client.connect(err => {
-    if (err) throw ('Osq failed to connect: ' + err)
+    if (err) throw ('Mowr failed to connect: ' + err)
     else db = client.db()
   })
 
