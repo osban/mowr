@@ -3,7 +3,7 @@ A very thin convenience wrapper for the Mongo client.
 
 ## Installation
 ```
-npm i -S mowr
+npm i mowr
 ```
 
 ## Usage
