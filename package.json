@@ -1,0 +1,10 @@
+{
+  "name": "Mowr",
+  "version": "1.0.0",
+  "description": "A very thin convenience wrapper for the Mongo client.",
+  "main": "index.js",
+  "keywords": ["mongo", "mongodb", "thin", "wrapper"],
+  "author": "osban",
+  "repository": "osban/mowr",
+  "license": "WTFPL"
+}
