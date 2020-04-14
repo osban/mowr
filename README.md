@@ -1,4 +1,5 @@
 # Mowr 😺 makes using the Mongo client more comfy
+![npm](https://img.shields.io/npm/v/mowr)  
 A very thin convenience wrapper for the Mongo client.
 
 ## Installation
