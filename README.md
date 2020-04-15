@@ -27,6 +27,6 @@ collection.deleteOne(query, options)
 collection.deleteMany(query, options)
 ```
 Options are always optional, and passed as object.  
-When connecting, 'mongodb://' is prepended if needed, and `useUnifiedTopology` is set to `true` (pass it as option to set it to `false`).
+When connecting, 'mongodb://' is prepended if needed, and `useUnifiedTopology` is set to `true` (pass it as option to set it to `false`).  
 The `query` field can be an `_id` string (Mowr will convert it to an ObjectID) or a query object.  
 When passing options using `find`, `findCur`, `findOne`, make sure to use a query (can be `{}`).
