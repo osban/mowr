@@ -10,15 +10,9 @@ npm i mowr
 ## Usage
 ```js
 const db = require('mowr')('localhost:27017/test', options)
+const collection = db.get('collection')
 
-app.get('/', (req, res, next) => {
-  const collection = db.get('collection')
-  
-  collection.find()
-  .then(result => res.send(result))
-  .catch(next)
-})
-
+Supported calls:
 collection.find(query, options)    // returns array
 collection.findCur(query, options) // returns cursor
 collection.findOne(query, options)

@@ -1,10 +1,18 @@
 {
   "name": "mowr",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A very thin convenience wrapper for the Mongo client.",
   "main": "index.js",
-  "keywords": ["mongo", "mongodb", "thin", "wrapper"],
+  "keywords": [
+    "mongo",
+    "mongodb",
+    "thin",
+    "wrapper"
+  ],
   "author": "osban",
   "repository": "osban/mowr",
-  "license": "WTFPL"
+  "license": "WTFPL",
+  "dependencies": {
+    "mongodb": "^3.5.6"
+  }
 }

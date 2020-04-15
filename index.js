@@ -6,31 +6,32 @@ module.exports = (url, opts = {}) => {
 
   const client = new MongoClient(url, opts)
   
-  let db
-  client.connect(err => {
-    if (err) throw ('Mowr failed to connect: ' + err)
-    else db = client.db()
-  })
+  const getdb = new Promise(rs =>
+    client.connect(err => {
+      if (err) throw ('Mowr failed to connect: ' + err)
+      else rs(client.db())
+    })
+  )
 
   return {
     get: cname => {
-      const coll  = db.collection(cname)
+      const getcoll = getdb.then(db => db.collection(cname))
       const query = what => typeof what === 'string' ? ({_id: new ObjectId(what)}) : what
   
       return {
-        find   : (what, opts = {}) => coll.find(query(what), opts).toArray(),
-        findCur: (what, opts = {}) => coll.find(query(what), opts),
-        findOne: (what, opts = {}) => coll.findOne(query(what), opts),
+        find   : (what, opts = {}) => getcoll.then(coll => coll.find(query(what), opts).toArray()),
+        findCur: (what, opts = {}) => getcoll.then(coll => coll.find(query(what), opts)),
+        findOne: (what, opts = {}) => getcoll.then(coll => coll.findOne(query(what), opts)),
         insert : (what, opts = {}) => 
           Array.isArray(what)
-          ? coll.insertMany(what, opts)
-          : coll.insertOne(what, opts),
-        insertOne : (what, opts = {}) => coll.insertOne(what, opts),
-        insertMany: (what, opts = {}) => coll.insertMany(what, opts),
-        updateOne : (what, update, opts = {}) => coll.updateOne(query(what), update, opts),
-        updateMany: (what, update, opts = {}) => coll.updateMany(what, update, opts),
-        deleteOne : (what, opts = {}) => coll.deleteOne(query(what), opts),
-        deleteMany: (what, opts = {}) => coll.deleteMany(what, opts)
+          ? getcoll.then(coll => coll.insertMany(what, opts))
+          : getcoll.then(coll => coll.insertOne(what, opts)),
+        insertOne : (what, opts = {}) => getcoll.then(coll => coll.insertOne(what, opts)),
+        insertMany: (what, opts = {}) => getcoll.then(coll => coll.insertMany(what, opts)),
+        updateOne : (what, update, opts = {}) => getcoll.then(coll => coll.updateOne(query(what), update, opts)),
+        updateMany: (what, update, opts = {}) => getcoll.then(coll => coll.updateMany(what, update, opts)),
+        deleteOne : (what, opts = {}) => getcoll.then(coll => coll.deleteOne(query(what), opts)),
+        deleteMany: (what, opts = {}) => getcoll.then(coll => coll.deleteMany(what, opts))
       }
     }
   }
