@@ -2,7 +2,7 @@ const {MongoClient, ObjectId} = require('mongodb')
 
 module.exports = (url, opts = {}) => {
   if (!url.includes('mongodb://')) url = 'mongodb://' + url
-  if (!opts.useUnifiedTopology) opts.useUnifiedTopology = true
+  if (!opts.hasOwnProperty('useUnifiedTopology')) opts.useUnifiedTopology = true
 
   const client = new MongoClient(url, opts)
   
