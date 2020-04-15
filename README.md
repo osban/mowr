@@ -1,5 +1,5 @@
 # Mowr 😺 makes using the Mongo client more comfy
-![npm](https://img.shields.io/npm/v/mowr)  
+![npm](https://img.shields.io/npm/v/mowr) ![GitHub file size in bytes](https://img.shields.io/github/size/osban/mowr/index.js)  
 A very thin convenience wrapper for the Mongo client.
 
 ## Installation
@@ -9,7 +9,7 @@ npm i mowr
 
 ## Usage
 ```js
-const db = require('mowr')('localhost:27017/test')
+const db = require('mowr')('localhost:27017/test', options)
 const collection = db.get('collection')
 
 collection.find(query, options)    // returns array
@@ -26,5 +26,7 @@ collection.updateMany(query, update, options)
 collection.deleteOne(query, options)
 collection.deleteMany(query, options)
 ```
+Options are always optional.
+When connecting, 'mongodb://' is prepended if needed, and `useUnifiedTopology` is set to `true`
 The `query` field can be an `_id` string (Mowr will convert it to an ObjectID) or a query object.  
 When passing options using `find`, `findCur`, `findOne`, make sure to use a query (can be `{}`).
