@@ -12,6 +12,8 @@ npm i mowr
 const db = require('mowr')('localhost:27017/test', options)
 const collection = db.get('collection')
 
+const collection = require('mowr')('localhost/test', options).get('collection')
+
 Supported calls:
 collection.find(query, options)    // returns array
 collection.findCur(query, options) // returns cursor
@@ -34,5 +36,7 @@ When connecting, 'mongodb://' is prepended if needed, and `useUnifiedTopology` i
 The `query` field can be an `_id` string (Mowr will convert it to an ObjectID) or a query object.
 
 Depending on if an object or array is passed in, `insert` will call `insertOne` or `insertMany`.
+
+If an update object contains an `_id` property, even if nested, it will be removed.
 
 When passing options using `find`, `findCur`, `findOne`, make sure to use a query (can be `{}`).
