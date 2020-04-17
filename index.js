@@ -17,19 +17,15 @@ module.exports = (url, opts = {}) => {
     get: cname => {
       const getcoll = getdb.then(db => db.collection(cname))
       const query = what => typeof what === 'string' ? ({_id: new ObjectId(what)}) : what
-      const remid = obj => Object.keys(obj).reduce((a,c) => ( 
-          c !== '_id'
-          ? a[c] =
-            typeof obj[c] === 'object'
-            ? remid(obj[c])
-            : obj[c]
-          : null,
-          a
-        ), {})
+      const remid = obj =>
+        Object.entries(obj).reduce((a,[k,v]) => { 
+          if (k !== '_id') a[k] = typeof v === 'object' ? remid(v) : v
+          return a
+        }, {})
   
       return {
         find   : (what, opts = {}) => getcoll.then(c => c.find(query(what), opts).toArray()),
-        findCur: (what, opts = {}) => getcoll.then(c => c.find(query(what), opts)),
+        findc  : (what, opts = {}) => getcoll.then(c => c.find(query(what), opts)),
         findOne: (what, opts = {}) => getcoll.then(c => c.findOne(query(what), opts)),
         insert : (what, opts = {}) => 
           Array.isArray(what)
@@ -39,6 +35,7 @@ module.exports = (url, opts = {}) => {
         insertMany: (what, opts = {}) => getcoll.then(c => c.insertMany(what, opts)),
         updateOne : (what, update, opts = {}) => getcoll.then(c => c.updateOne(query(what), remid(update), opts)),
         updateMany: (what, update, opts = {}) => getcoll.then(c => c.updateMany(what, remid(update), opts)),
+        replaceOne: (what, update, opts = {}) => getcoll.then(c => c.replaceOne(query(what), remid(update), opts)),
         deleteOne : (what, opts = {}) => getcoll.then(c => c.deleteOne(query(what), opts)),
         deleteMany: (what, opts = {}) => getcoll.then(c => c.deleteMany(what, opts))
       }
