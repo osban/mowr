@@ -24,10 +24,10 @@ module.exports = (url, opts = {}) => {
         }, {})
   
       return {
-        find   : (what, opts = {}) => getcoll.then(c => c.find(query(what), opts).toArray()),
-        findc  : (what, opts = {}) => getcoll.then(c => c.find(query(what), opts)),
-        findOne: (what, opts = {}) => getcoll.then(c => c.findOne(query(what), opts)),
-        insert : (what, opts = {}) => 
+        find      : (what, opts = {}) => getcoll.then(c => c.find(query(what), opts).toArray()),
+        findc     : (what, opts = {}) => getcoll.then(c => c.find(query(what), opts)),
+        findOne   : (what, opts = {}) => getcoll.then(c => c.findOne(query(what), opts)),
+        insert    : (what, opts = {}) => 
           Array.isArray(what)
           ? getcoll.then(c => c.insertMany(what, opts))
           : getcoll.then(c => c.insertOne(what, opts)),

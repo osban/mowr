@@ -14,5 +14,8 @@
   "license": "WTFPL",
   "dependencies": {
     "mongodb": "^3.5.6"
+  },
+  "devDependencies": {
+    "clean-assert": "^3.0.0"
   }
 }
