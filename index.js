@@ -29,10 +29,10 @@ module.exports = (url, opts = {}) => {
         findOne   : (what, opts = {}) => getcoll.then(c => c.findOne(query(what), opts)),
         insert    : (what, opts = {}) => 
           Array.isArray(what)
-          ? getcoll.then(c => c.insertMany(what, opts))
-          : getcoll.then(c => c.insertOne(what, opts)),
-        insertOne : (what, opts = {}) => getcoll.then(c => c.insertOne(what, opts)),
-        insertMany: (what, opts = {}) => getcoll.then(c => c.insertMany(what, opts)),
+          ? getcoll.then(c => c.insertMany(what, opts).then(x => x.ops))
+          : getcoll.then(c => c.insertOne(what, opts).then(x => x.ops[0])),
+        insertOne : (what, opts = {}) => getcoll.then(c => c.insertOne(what, opts).then(x => x.ops[0])),
+        insertMany: (what, opts = {}) => getcoll.then(c => c.insertMany(what, opts).then(x => x.ops)),
         updateOne : (what, update, opts = {}) => getcoll.then(c => c.updateOne(query(what), remid(update), opts)),
         updateMany: (what, update, opts = {}) => getcoll.then(c => c.updateMany(what, remid(update), opts)),
         replaceOne: (what, update, opts = {}) => getcoll.then(c => c.replaceOne(query(what), remid(update), opts)),

@@ -19,14 +19,15 @@ const clone = x => JSON.parse(JSON.stringify(x))
     logit('---------------------------------------------')
     await coll.insert(clone(ins1))
     .then(x => {
-      ca.hasIn(x, 'insertedCount', 1)
+      ca.is('object', x)
+      ca.hasAllOwn(x, ins1)
       logit('01 - insert (one) PASSED')
     })
 
     await coll.insert(clone(ins2))
     .then(x => {
-      ca.hasIn(x, 'insertedCount', 2)
-      ca.equal(Object.keys(x.insertedIds).length, 2)
+      ca.is('array', x)
+      ca.equal(x.length, 2)
       logit('02 - insert (many) PASSED')
     })
 
@@ -96,14 +97,15 @@ const clone = x => JSON.parse(JSON.stringify(x))
 
     await coll.insertOne(clone(ins1))
     .then(x => {
-      ca.hasIn(x, 'insertedCount', 1)
+      ca.is('object', x)
+      ca.hasAllOwn(x, ins1)
       logit('13 - insertOne PASSED')
     })
 
     await coll.insertMany(clone(ins2))
     .then(x => {
-      ca.hasIn(x, 'insertedCount', 2)
-      ca.equal(Object.keys(x.insertedIds).length, 2)
+      ca.is('array', x)
+      ca.equal(x.length, 2)
       logit('14 - insertMany PASSED')
     })
 
