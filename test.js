@@ -61,37 +61,49 @@ const clone = x => JSON.parse(JSON.stringify(x))
 
     await coll.updateOne((list[0]._id + ''), {$set: upd1})
     .then(x => {
-      ca.hasAllOwn(x, {matchedCount: 1, modifiedCount: 1})
+      ca.hasIn(x, 'n', 1)
+      ca.hasIn(x, 'nModified', 1)
+      ca.hasIn(x, 'ok', 1)
       logit('07 - updateOne without _id PASSED')
     })
 
     await coll.updateOne((list[0]._id + ''), {$set: {...ins1, _id: (list[0]._id + '')}})
     .then(x => {
-      ca.hasAllOwn(x, {matchedCount: 1, modifiedCount: 1})
+      ca.hasIn(x, 'n', 1)
+      ca.hasIn(x, 'nModified', 1)
+      ca.hasIn(x, 'ok', 1)
       logit('08 - updateOne with _id PASSED')
     })
 
     await coll.replaceOne({def: 'def'}, rep1)
     .then(x => {
-      ca.hasAllOwn(x, {matchedCount: 1, modifiedCount: 1})
+      ca.hasIn(x, 'n', 1)
+      ca.hasIn(x, 'nModified', 1)
+      ca.hasIn(x, 'ok', 1)
       logit('09 - replaceOne without _id PASSED')
     })
 
     await coll.replaceOne({foo: 'foo'}, {...rep1, _id: (list[0]._id + '')})
     .then(x => {
-      ca.hasAllOwn(x, {matchedCount: 1, modifiedCount: 1})
+      ca.hasIn(x, 'n', 1)
+      ca.hasIn(x, 'nModified', 1)
+      ca.hasIn(x, 'ok', 1)
       logit('10 - replaceOne with _id PASSED')
     })
 
     await coll.updateMany({abc: 'abc'}, {$set: rep2})
     .then(x => {
-      ca.hasAllOwn(x, {matchedCount: 2, modifiedCount: 2})
+      ca.hasIn(x, 'n', 2)
+      ca.hasIn(x, 'nModified', 2)
+      ca.hasIn(x, 'ok', 1)
       logit('11 - updateMany without _id PASSED')
     })
 
     await coll.updateMany({abc: 'abc'}, {$set: {...rep3, _id: (list[0]._id + '')}})
     .then(x => {
-      ca.hasAllOwn(x, {matchedCount: 2, modifiedCount: 2})
+      ca.hasIn(x, 'n', 2)
+      ca.hasIn(x, 'nModified', 2)
+      ca.hasIn(x, 'ok', 1)
       logit('12 - updateMany with _id PASSED')
     })
 
@@ -111,13 +123,15 @@ const clone = x => JSON.parse(JSON.stringify(x))
 
     await coll.deleteOne({omg: 'omg'})
     .then(x => {
-      ca.hasIn(x, 'deletedCount', 1)
+      ca.hasIn(x, 'n', 1)
+      ca.hasIn(x, 'ok', 1)
       logit('15 - deleteOne PASSED')
     })
 
     await coll.deleteMany({$or: [{abc: 'abc'}, {omg: 'omg'}, {foo: 'foo'}]})
     .then(x => {
-      ca.hasIn(x, 'deletedCount', 5)
+      ca.hasIn(x, 'n', 5)
+      ca.hasIn(x, 'ok', 1)
       logit('16 - deleteMany PASSED')
     })
 

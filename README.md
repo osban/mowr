@@ -17,20 +17,20 @@ const collection = require('mowr')('localhost/test', options).get('collection')
 
 ### Supported calls
 ```js
-collection.find(query, options)  // returns array
-collection.findc(query, options) // returns cursor
-collection.findOne(query, options)
+collection.find(query, options)    // returns array
+collection.findc(query, options)   // returns cursor
+collection.findOne(query, options) // returns object
 
-collection.insert(object/array, options)
-collection.insertOne(object, options)
-collection.insertMany(array, options)
+collection.insert(object/array, options) // returns inserted object/array
+collection.insertOne(object, options)    // returns inserted object
+collection.insertMany(array, options)    // returns inserted array
 
-collection.updateOne(query, update, options)
-collection.updateMany(query, update, options)
-collection.replaceOne(query, update, options)
+collection.updateOne(query, update, options)  // -> {n: 1, nModified: 1, ok: 1}
+collection.updateMany(query, update, options) // -> {n: 5, nModified: 5, ok: 1}
+collection.replaceOne(query, update, options) // -> {n: 1, nModified: 1, ok: 1}
 
-collection.deleteOne(query, options)
-collection.deleteMany(query, options)
+collection.deleteOne(query, options)  // -> {n: 1, ok: 1}
+collection.deleteMany(query, options) // -> {n: 5, ok: 1}
 ```
 Options are always optional, and passed as object.
 

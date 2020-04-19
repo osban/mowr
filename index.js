@@ -33,11 +33,11 @@ module.exports = (url, opts = {}) => {
           : getcoll.then(c => c.insertOne(what, opts).then(x => x.ops[0])),
         insertOne : (what, opts = {}) => getcoll.then(c => c.insertOne(what, opts).then(x => x.ops[0])),
         insertMany: (what, opts = {}) => getcoll.then(c => c.insertMany(what, opts).then(x => x.ops)),
-        updateOne : (what, update, opts = {}) => getcoll.then(c => c.updateOne(query(what), remid(update), opts)),
-        updateMany: (what, update, opts = {}) => getcoll.then(c => c.updateMany(what, remid(update), opts)),
-        replaceOne: (what, update, opts = {}) => getcoll.then(c => c.replaceOne(query(what), remid(update), opts)),
-        deleteOne : (what, opts = {}) => getcoll.then(c => c.deleteOne(query(what), opts)),
-        deleteMany: (what, opts = {}) => getcoll.then(c => c.deleteMany(what, opts))
+        updateOne : (what, update, opts = {}) => getcoll.then(c => c.updateOne(query(what), remid(update), opts).then(x => x.result)),
+        updateMany: (what, update, opts = {}) => getcoll.then(c => c.updateMany(what, remid(update), opts).then(x => x.result)),
+        replaceOne: (what, update, opts = {}) => getcoll.then(c => c.replaceOne(query(what), remid(update), opts).then(x => x.result)),
+        deleteOne : (what, opts = {}) => getcoll.then(c => c.deleteOne(query(what), opts).then(x => x.result)),
+        deleteMany: (what, opts = {}) => getcoll.then(c => c.deleteMany(what, opts).then(x => x.result))
       }
     }
   }
