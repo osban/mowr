@@ -36,7 +36,7 @@ Options are always optional, and passed as object.
 
 When connecting, `'mongodb://'` is prepended if needed, and `useUnifiedTopology` is set to `true` (pass it as option to set it to `false`).
 
-The `query` field can be an `_id` string (Mowr will convert it to an ObjectID) or a query object.
+The `query` field can be an `_id` string (it will be converted to `{_id: <ObjectID>}`) or a query object.
 
 Depending on if an object or array is passed in, `insert` will call `insertOne` or `insertMany`.
 
