@@ -19,7 +19,7 @@ module.exports = (url, opts = {}) => {
       const query = what => typeof what === 'string' ? ({_id: new ObjectId(what)}) : what
       const remid = obj =>
         Object.entries(obj).reduce((a,[k,v]) => { 
-          if (k !== '_id') a[k] = (v && typeof v === 'object' && !Array.isArray(v)) ? remid(v) : v
+          if (k !== '_id') a[k] = (v && typeof v === 'object' && !Array.isArray(v) && !v instanceof Date) ? remid(v) : v
           return a
         }, {})
   
