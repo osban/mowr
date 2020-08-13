@@ -13,7 +13,7 @@
   "repository": "osban/mowr",
   "license": "WTFPL",
   "dependencies": {
-    "mongodb": "^3.5.6"
+    "mongodb": "^3.6.0"
   },
   "devDependencies": {
     "clean-assert": "^3.0.0"

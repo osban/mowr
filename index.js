@@ -1,6 +1,7 @@
 const {MongoClient, ObjectId} = require('mongodb')
 
 module.exports = (url, opts = {}) => {
+  if (!url) throw ('Mowr cannot connect to url: ' + url)
   if (!url.includes('mongodb://')) url = 'mongodb://' + url
   if (!opts.hasOwnProperty('useUnifiedTopology')) opts.useUnifiedTopology = true
 

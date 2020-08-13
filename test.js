@@ -1,6 +1,6 @@
 const ca       = require('./node_modules/clean-assert')
 const ObjectId = require('./node_modules/mongodb').ObjectId
-const coll     = require('./index.js')('localhost/test').get('coll')
+const coll     = require('./index.js')('localhost:27127/test').get('coll')
 
 const ins1 = {foo: 'foo', bar: 'bar', baz: 'baz'}
 const ins2 = [{foo: 'foo', bar: 'bar', baz: 'baz'}, {omg: 'omg', wtf: 'wtf', bbq: 'bbq'}]
