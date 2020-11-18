@@ -38,7 +38,10 @@ module.exports = (url, opts = {}) => {
         updateMany: (what, update, opts = {}) => getcoll.then(c => c.updateMany(what, remid(update), opts).then(x => x.result)),
         replaceOne: (what, update, opts = {}) => getcoll.then(c => c.replaceOne(query(what), remid(update), opts).then(x => x.result)),
         deleteOne : (what, opts = {}) => getcoll.then(c => c.deleteOne(query(what), opts).then(x => x.result)),
-        deleteMany: (what, opts = {}) => getcoll.then(c => c.deleteMany(what, opts).then(x => x.result))
+        deleteMany: (what, opts = {}) => getcoll.then(c => c.deleteMany(what, opts).then(x => x.result)),
+        findOneAndUpdate : (what, update, opts = {}) => getcoll.then(c => c.findOneAndUpdate(query(what), remid(update), opts).then(x => x.value)),
+        findOneAndReplace: (what, update, opts = {}) => getcoll.then(c => c.findOneAndReplace(query(what), remid(update), opts).then(x => x.value)),
+        findOneAndDelete : (what, opts = {}) => getcoll.then(c => c.findOneAndDelete(query(what), opts).then(x => x.value))
       }
     }
   }

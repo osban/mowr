@@ -31,6 +31,10 @@ collection.replaceOne(query, update, options) // -> {n: 1, nModified: 1, ok: 1}
 
 collection.deleteOne(query, options)  // -> {n: 1, ok: 1}
 collection.deleteMany(query, options) // -> {n: 5, ok: 1}
+
+collection.findOneAndUpdate(query, update, options)  // returns original document
+collection.findOneAndReplace(query, update, options) // returns original document
+collection.findOneAndDelete(query, options)          // returns deleted document
 ```
 Options are always optional, and passed as object.
 
